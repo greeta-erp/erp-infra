@@ -1,0 +1,33 @@
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      database: admin
+      authentication-database: admin
+
+  keycloak:
+      server-url: https://keycloak.greeta.net
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${spring.keycloak.server-url}/realms/company-services
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+server:
+  forward-headers-strategy: framework
+
+jwt:
+  auth:
+    converter:
+      resource-id: erp-app
+      principal-attribute: preferred_username
+
+app:
+  redirect-url:
+  cors:
+    allowed-origins: ${erp-app.base-url}
+
+erp-app:
+  base-url: http://localhost:3000
+  redirect-url: ${erp-app.base-url}/*

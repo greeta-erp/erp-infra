@@ -1,0 +1,83 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    bootstrap:
+      enabled: true
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: employee
+          uri: http://employee:8080
+          predicates:
+            - Path=/employee/**
+          filters:
+            - RewritePath=/employee/(?<path>.*), /$\{path}
+        - id: department
+          uri: http://department:8080
+          predicates:
+            - Path=/department/**
+          filters:
+            - RewritePath=/department/(?<path>.*), /$\{path}
+        - id: organization
+          uri: http://organization:8080
+          predicates:
+            - Path=/organization/**
+          filters:
+            - RewritePath=/organization/(?<path>.*), /$\{path}
+  keycloak:
+      server-url: https://keycloak.greeta.net
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${spring.keycloak.server-url}/realms/company-services
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    converter:
+      resource-id: erp-app
+      principal-attribute: preferred_username
+
+app:
+  redirect-url:
+  cors:
+    allowed-origins: ${erp-app.base-url}
+
+erp-app:
+  base-url: http://localhost:3000
+  redirect-url: ${erp-app.base-url}/*
+
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+server.forward-headers-strategy: framework
+
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+        primaryName: API Gateway Service
+      - url: /department/v3/api-docs
+        name: Department Service
+        primaryName: Department Service
+      - url: /employee/v3/api-docs
+        name: Employee Service
+        primaryName: Employee Service
+      - url: /organization/v3/api-docs
+        name: Organization Service
+        primaryName: Organization Service
