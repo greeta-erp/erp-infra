@@ -1,2 +1,2 @@
-# movies-infra
-Movies AWS Infrastructure with Terraform
+# erp-infra
+ERP AWS Infrastructure with Terraform

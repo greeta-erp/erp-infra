@@ -1,7 +1,7 @@
 # Define Local Values in Terraform
 locals {
   environment = var.environment
-  name = "movies-${var.environment}"
+  name = "erp-${var.environment}"
   common_tags = {
     environment = local.environment
   }
