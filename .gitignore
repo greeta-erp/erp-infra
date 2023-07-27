@@ -33,5 +33,6 @@ override.tf.json
 terraform.auto.tfvars
 **/volumes/**
 **/kafka-client-storage/**
+/.idea/**
 --region
 LocationConstraint=eu-central-1
