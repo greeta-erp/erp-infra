@@ -31,13 +31,39 @@ spring:
           filters:
             - RewritePath=/organization/(?<path>.*), /$\{path}
   keycloak:
-      server-url: https://keycloak.greeta.net
+      server-url: http://keycloak-server:8080
   security:
     oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${spring.keycloak.server-url}/realms/company-services
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+      # resourceserver:
+      #   jwt:
+      #     issuer-uri: ${spring.keycloak.server-url}/realms/erp-realm
+      #     jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs    
+      client:
+        registration:
+          keycloak:
+            client-id: erp-app
+            scope: openid,roles
+      #     keycloak:
+            # redirect-uri: https://books-api.greeta.net/login/oauth2/code/keycloak
+            # client-secret: 1b1b19599c2264fd218c
+
+        provider:
+          keycloak:
+            issuer-uri: http://keycloak-server:8080/realms/company-services
+            authorization-uri: https://keycloak.greeta.net/realms/company-services/protocol/openid-connect/auth
+            # token-uri: https://keycloak.greeta.net/realms/company-services/protocol/openid-connect/token
+      # resourceserver:
+      #   jwt:
+      #     issuer-uri: https://keycloak.greeta.net/realms/erp-realm
+      #     jwk-set-uri: https://keycloak.greeta.net/protocol/openid-connect/certs          
+
+# keycloak:
+#   auth-server-url: ${spring.keycloak.server-url}  
+#   realm: erp-realm
+#   resource: erp-app
+#   ssl-required: external
+#   principal-attribute: preferred_username
+#   use-resource-role-mappings: true          
 
 jwt:
   auth:
@@ -45,13 +71,13 @@ jwt:
       resource-id: erp-app
       principal-attribute: preferred_username
 
-app:
-  redirect-url:
-  cors:
-    allowed-origins: ${erp-app.base-url}
+# app:
+#   redirect-url:
+#   # cors:
+#   #   allowed-origins: ${erp-app.base-url}
 
 erp-app:
-  base-url: http://localhost:3000
+  base-url: https://erp.greeta.net
   redirect-url: ${erp-app.base-url}/*
 
 logging:
