@@ -56,7 +56,7 @@ resource "kubernetes_deployment_v1" "organization_deployment" {
         service_account_name = "spring-cloud-kubernetes"
         
         container {
-          image = "ghcr.io/greeta-erp/organization-service:779d81deedf7b07925ef5b039f9807197e3fd0ff"
+          image = "ghcr.io/greeta-erp/organization-service:ec6eed178450e416aa035d8b14a1d7b575e21bcc"
           name  = "organization"
           image_pull_policy = "Always"
           
