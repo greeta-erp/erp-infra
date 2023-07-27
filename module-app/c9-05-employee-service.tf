@@ -7,7 +7,7 @@ resource "kubernetes_config_map_v1" "employee" {
   }
 
   data = {
-    "application.properties" = file("${path.module}/app-conf/employee.yml")
+    "application.yml" = file("${path.module}/app-conf/employee.yml")
   }
 }
 

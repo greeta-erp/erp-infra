@@ -23,11 +23,6 @@ jwt:
       resource-id: erp-app
       principal-attribute: preferred_username
 
-app:
-  redirect-url:
-  cors:
-    allowed-origins: ${erp-app.base-url}
-
 erp-app:
   base-url: http://localhost:3000
   redirect-url: ${erp-app.base-url}/*
