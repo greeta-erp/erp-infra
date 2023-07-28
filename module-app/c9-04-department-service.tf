@@ -7,7 +7,7 @@ resource "kubernetes_config_map_v1" "department" {
   }
 
   data = {
-    "application.properties" = file("${path.module}/app-conf/department.properties")
+    "application.yml" = file("${path.module}/app-conf/department.yml")
   }
 }
 

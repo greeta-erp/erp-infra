@@ -1,0 +1,23 @@
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      database: admin
+      authentication-database: admin
+
+  keycloak:
+      server-url: http://keycloak-server:8080
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${spring.keycloak.server-url}/realms/erp-realm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs      
+
+server:
+  forward-headers-strategy: framework
+
+openapi:
+  oauthflow:
+    authServerUrl: https://keycloak.greeta.net
+    realm: erp-realm
