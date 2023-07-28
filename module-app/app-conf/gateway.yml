@@ -33,29 +33,25 @@ spring:
   keycloak:
       server-url: http://keycloak-server:8080
   security:
-    oauth2:
-      # resourceserver:
-      #   jwt:
-      #     issuer-uri: ${spring.keycloak.server-url}/realms/erp-realm
-      #     jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs    
-      client:
-        registration:
-          keycloak:
-            client-id: erp-app
-            scope: openid,roles
+    oauth2: 
+      # client:
+      #   registration:
       #     keycloak:
-            # redirect-uri: https://books-api.greeta.net/login/oauth2/code/keycloak
-            # client-secret: 1b1b19599c2264fd218c
+      #       client-id: erp-app
+      #       scope: openid,roles
+      # ##     keycloak:
+      #       # redirect-uri: https://books-api.greeta.net/login/oauth2/code/keycloak
+      #       # client-secret: 1b1b19599c2264fd218c
 
-        provider:
-          keycloak:
-            issuer-uri: http://keycloak-server:8080/realms/company-services
-            authorization-uri: https://keycloak.greeta.net/realms/company-services/protocol/openid-connect/auth
-            # token-uri: https://keycloak.greeta.net/realms/company-services/protocol/openid-connect/token
-      # resourceserver:
-      #   jwt:
-      #     issuer-uri: https://keycloak.greeta.net/realms/erp-realm
-      #     jwk-set-uri: https://keycloak.greeta.net/protocol/openid-connect/certs          
+      #   provider:
+      #     keycloak:
+      #       issuer-uri: http://keycloak-server:8080/realms/erp-realm
+      #       authorization-uri: https://keycloak.greeta.net/realms/erp-realm/protocol/openid-connect/auth
+      #       # token-uri: https://keycloak.greeta.net/realms/erp-realm/protocol/openid-connect/token
+      resourceserver:
+        jwt:
+          issuer-uri: ${spring.keycloak.server-url}/realms/erp-realm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 # keycloak:
 #   auth-server-url: ${spring.keycloak.server-url}  
