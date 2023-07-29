@@ -45,7 +45,7 @@ resource "kubernetes_deployment_v1" "admin_deployment" {
         service_account_name = "spring-cloud-kubernetes"         
         
         container {
-          image = "ghcr.io/greeta-erp/admin-service:dec15f6dba597b7caff483269891174f24204b9c"
+          image = "ghcr.io/greeta-erp/admin-service:12dca9d38930dfd9d0c2ac88091814aa55de8483"
           name  = "admin"
           image_pull_policy = "Always"
 
