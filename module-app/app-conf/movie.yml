@@ -1,9 +1,7 @@
 spring:
   data:
     mongodb:
-      host: mongodb
-      database: admin
-      authentication-database: admin
+      uri: mongodb://movies-mongodb:27017/moviesdb
 
   keycloak:
       server-url: http://keycloak-server:8080

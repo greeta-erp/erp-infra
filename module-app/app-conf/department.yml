@@ -11,11 +11,25 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${spring.keycloak.server-url}/realms/erp-realm
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs      
+          issuer-uri: https://keycloak.greeta.net/realms/erp-realm
+          jwk-set-uri: ${spring.keycloak.server-url}/realms/erp-realm/protocol/openid-connect/certs
 
 server:
   forward-headers-strategy: framework
+
+jwt:
+  auth:
+    converter:
+      resource-id: erp-app
+      principal-attribute: preferred_username
+
+erp-app:
+  base-url: https://erp.greeta.net
+  redirect-url: ${erp-app.base-url}/*
+
+app:
+  cors:
+    allowed-origins: ${erp-app.base-url}  
 
 openapi:
   oauthflow:

@@ -22,8 +22,9 @@ jobs:
           sed -i "s/admin-service:.*\"/admin-service:${{ env.APP_VERSION }}\"/" c9-03-admin-service.tf
           sed -i "s/department-service:.*\"/department-service:${{ env.APP_VERSION }}\"/" c9-04-department-service.tf
           sed -i "s/employee-service:.*\"/employee-service:${{ env.APP_VERSION }}\"/" c9-05-employee-service.tf
-          sed -i "s/gateway-service:.*\"/gateway-service:${{ env.APP_VERSION }}\"/" c9-06-gateway-service.tf
-          sed -i "s/organization-service:.*\"/organization-service:${{ env.APP_VERSION }}\"/" c9-07-organization-service.tf
+          sed -i "s/movie-service:.*\"/movie-service:${{ env.APP_VERSION }}\"/" c9-07-movie-service.tf
+          sed -i "s/organization-service:.*\"/organization-service:${{ env.APP_VERSION }}\"/" c9-08-organization-service.tf
+          sed -i "s/gateway-service:.*\"/gateway-service:${{ env.APP_VERSION }}\"/" c9-09-gateway-service.tf
       - name: Commit updated manifests
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

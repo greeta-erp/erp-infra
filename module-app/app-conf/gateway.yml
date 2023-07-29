@@ -50,8 +50,8 @@ spring:
       #       # token-uri: https://keycloak.greeta.net/realms/erp-realm/protocol/openid-connect/token
       resourceserver:
         jwt:
-          issuer-uri: ${spring.keycloak.server-url}/realms/erp-realm
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+          issuer-uri: https://keycloak.greeta.net/realms/erp-realm
+          jwk-set-uri: ${spring.keycloak.server-url}/realms/erp-realm/protocol/openid-connect/certs
 
 # keycloak:
 #   auth-server-url: ${spring.keycloak.server-url}  
@@ -75,6 +75,10 @@ jwt:
 erp-app:
   base-url: https://erp.greeta.net
   redirect-url: ${erp-app.base-url}/*
+
+app:
+  cors:
+    allowed-origins: ${erp-app.base-url}  
 
 logging:
   pattern: 
