@@ -8,6 +8,20 @@ spring:
       ribbon:
         enabled: false
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "https://movie.greeta.net"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTIONS
       discovery:
         locator:
           enabled: true
@@ -30,6 +44,12 @@ spring:
             - Path=/organization/**
           filters:
             - RewritePath=/organization/(?<path>.*), /$\{path}
+        - id: movie
+          uri: http://movie:8080
+          predicates:
+            - Path=/movie/**
+          filters:
+            - RewritePath=/movie/(?<path>.*), /$\{path}
   keycloak:
       server-url: http://keycloak-server:8080
   security:
@@ -76,9 +96,9 @@ erp-app:
   base-url: https://erp.greeta.net
   redirect-url: ${erp-app.base-url}/*
 
-app:
-  cors:
-    allowed-origins: ${erp-app.base-url}  
+movie-app:
+  base-url: https://movie.greeta.net
+  redirect-url: ${movie-app.base-url}/*
 
 logging:
   pattern: 
@@ -107,3 +127,6 @@ springdoc:
       - url: /organization/v3/api-docs
         name: Organization Service
         primaryName: Organization Service
+      - url: /movie/v3/api-docs
+        name: Movie Service
+        primaryName: Movie Service

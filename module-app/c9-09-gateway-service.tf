@@ -11,9 +11,21 @@ resource "kubernetes_config_map_v1" "gateway" {
   }
 }
 
+resource "kubernetes_secret_v1" "gateway" {
+  metadata {
+    name = "gateway"
+  }
+
+  data = {
+    "spring.redis.host"     = "gateway-redis"
+    "spring.redis.port"     = "6379"
+    "spring.redis.username" = "default"
+  }
+}
+
 
 resource "kubernetes_deployment_v1" "gateway_deployment" {
-  depends_on = [kubernetes_deployment_v1.mongodb]
+  depends_on = [kubernetes_deployment_v1.mongodb, kubernetes_deployment_v1.gateway_redis_deployment]
   metadata {
     name = "gateway"
     labels = {
@@ -41,12 +53,20 @@ resource "kubernetes_deployment_v1" "gateway_deployment" {
       }
       spec {
         service_account_name = "spring-cloud-kubernetes"
+
         volume {
           name = "gateway-config-volume"    
           config_map {
             name = "gateway"
           }
-        }        
+        }
+
+        volume {
+          name = "gateway-secret-volume"
+          secret {
+            secret_name = "gateway"
+          }
+        }               
         
         container {
           image = "ghcr.io/greeta-erp/gateway-service:cd8b662e2e4542fd483f279705910924e08b5b65"
@@ -79,7 +99,7 @@ resource "kubernetes_deployment_v1" "gateway_deployment" {
           env {
             name  = "OTEL_METRICS_EXPORTER"
             value = "none"
-          }
+          }       
 
           # resources {
           #   requests = {
@@ -122,8 +142,14 @@ resource "kubernetes_deployment_v1" "gateway_deployment" {
             name       = "gateway-config-volume"
             mount_path = "/config-repo"
           }
+
+          volume_mount {
+            name      = "gateway-secret-volume"
+            mount_path = "/workspace/secrets/redis"
+          }             
  
         }
+
       }
     }
   }

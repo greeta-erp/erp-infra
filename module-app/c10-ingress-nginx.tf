@@ -159,7 +159,27 @@ resource "kubernetes_ingress_v1" "ingress" {
           path_type = "Prefix"
         }
       }
-    }           
+    } 
+
+    rule {
+      host = "movie.greeta.net"
+      http {
+
+        path {
+          backend {
+            service {
+              name = "movie-ui"
+              port {
+                number = 4200
+              }
+            }
+          }
+
+          path = "/"
+          path_type = "Prefix"
+        }
+      }
+    }                  
     
   }
 }
