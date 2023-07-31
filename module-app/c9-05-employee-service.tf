@@ -56,7 +56,7 @@ resource "kubernetes_deployment_v1" "employee_deployment" {
         service_account_name = "spring-cloud-kubernetes"      
         
         container {
-          image = "ghcr.io/greeta-erp/employee-service:e84d36c0aacf6e05738a6eddc3f2f0712897f813"
+          image = "ghcr.io/greeta-erp/employee-service:5b0d4bbfe04e40f5e31947288dd6444c766b8172"
           name  = "employee"
           image_pull_policy = "Always"
           port {
