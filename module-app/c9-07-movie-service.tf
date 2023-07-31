@@ -42,7 +42,7 @@ resource "kubernetes_deployment_v1" "movie_deployment" {
         service_account_name = "spring-cloud-kubernetes"      
         
         container {
-          image = "ghcr.io/greeta-erp/movie-service:7a1c8d7494336fc35fd925ad86151a77badb548b"
+          image = "ghcr.io/greeta-erp/movie-service:0d3bf74aaf1bd52959776443e93b46ac5613a2ce"
           name  = "movie"
           image_pull_policy = "Always"
           port {
