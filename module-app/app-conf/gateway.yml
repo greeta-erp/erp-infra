@@ -13,10 +13,7 @@ spring:
       default-filters:
         - SaveSession
         - TokenRelay
-      #default-filters:
-      #    - NoCorsGatewayFilterFactory
-      #   - TokenRelay
-      #   - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Access-Control-Request-Headers, RETAIN_FIRST
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Access-Control-Request-Headers, RETAIN_FIRST
       globalcors:
         add-to-simple-url-handler-mapping: true
         corsConfigurations:
@@ -68,43 +65,17 @@ spring:
       namespace: erp:gateway
   security:
     oauth2: 
-      # client:
-      #   registration:
-      #     keycloak:
-      #       client-id: erp-app
-      #       scope: openid,roles
-      # ##     keycloak:
-      #       # redirect-uri: https://books-api.greeta.net/login/oauth2/code/keycloak
-      #       # client-secret: 1b1b19599c2264fd218c
-
-      #   provider:
-      #     keycloak:
-      #       issuer-uri: http://keycloak-server:8080/realms/erp-realm
-      #       authorization-uri: https://keycloak.greeta.net/realms/erp-realm/protocol/openid-connect/auth
-      #       # token-uri: https://keycloak.greeta.net/realms/erp-realm/protocol/openid-connect/token
       resourceserver:
         jwt:
           issuer-uri: https://keycloak.greeta.net/realms/erp-realm
           jwk-set-uri: ${spring.keycloak.server-url}/realms/erp-realm/protocol/openid-connect/certs
-
-# keycloak:
-#   auth-server-url: ${spring.keycloak.server-url}  
-#   realm: erp-realm
-#   resource: erp-app
-#   ssl-required: external
-#   principal-attribute: preferred_username
-#   use-resource-role-mappings: true          
+       
 
 jwt:
   auth:
     converter:
       resource-id: erp-app
       principal-attribute: preferred_username
-
-# app:
-#   redirect-url:
-#   # cors:
-#   #   allowed-origins: ${erp-app.base-url}
 
 erp-app:
   base-url: https://erp.greeta.net
