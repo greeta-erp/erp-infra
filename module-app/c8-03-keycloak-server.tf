@@ -63,10 +63,6 @@ resource "kubernetes_deployment_v1" "keycloak_server" {
             name = "KC_DB_PASSWORD"
             value = "postgres"
           }  
-          # env {
-          #   name = "KC_HOSTNAME"
-          #   value = "keycloak.greeta.net"
-          # }
           env {
             name = "KC_PROXY"
             value = "edge"

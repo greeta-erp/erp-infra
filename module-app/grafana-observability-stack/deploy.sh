@@ -1,7 +1,5 @@
 #!/bin/sh
 
-aws eks --region eu-central-1 update-kubeconfig --name erp-cluster
-
 set -euo pipefail
 
 echo "\n🔭  Observability stack deployment started.\n"

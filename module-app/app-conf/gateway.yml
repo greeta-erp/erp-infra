@@ -79,11 +79,11 @@ jwt:
 
 erp-app:
   base-url: https://erp.greeta.net
-  redirect-url: ${erp-app.base-url}
+  redirect-url: ${erp-app.base-url}/*
 
 movie-app:
   base-url: https://movie.greeta.net
-  redirect-url: ${movie-app.base-url}
+  redirect-url: ${movie-app.base-url}/*
 
 logging:
   pattern: 

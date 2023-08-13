@@ -5,12 +5,6 @@ resource "kubernetes_ingress_v1" "ingress" {
     annotations = {
       "nginx.ingress.kubernetes.io/rewrite-target" = "/"
       "kubernetes.io/ingress.class" =  "nginx"
-      "nginx.ingress.kubernetes.io/proxy-set-header" = <<EOF
-        Host $host;
-        X-Real-IP $remote_addr;
-        X-Forwarded-For $proxy_add_x_forwarded_for;
-        X-Forwarded-Proto $scheme;
-      EOF
     }  
   }
 
