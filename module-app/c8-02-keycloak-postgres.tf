@@ -61,7 +61,7 @@ resource "kubernetes_service_v1" "keycloak_postgres_service" {
       port        = 5432 # Service Port
       target_port = 5432 # Container Port  # Ignored when we use cluster_ip = "None"
     }
-    type = "LoadBalancer"
+    type = "ClusterIP"
     # load_balancer_ip = "" # This means we are going to use Pod IP   
   }
 }

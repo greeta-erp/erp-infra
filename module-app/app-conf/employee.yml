@@ -27,11 +27,3 @@ openapi:
   oauthflow:
     authServerUrl: https://keycloak.greeta.net
     realm: erp-realm
-
-erp-app:
-  base-url: https://erp.greeta.net
-  redirect-url: ${erp-app.base-url}
-
-movie-app:
-  base-url: https://movie.greeta.net
-  redirect-url: ${movie-app.base-url}
